@@ -1,0 +1,77 @@
+      {/* Mission Section - Clean & Simple */}
+      <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Left - Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6"
+            >
+              <div>
+                <span className="inline-block text-gold-600 font-semibold text-sm tracking-widest uppercase mb-4">
+                  Our Mission
+                </span>
+                <h2 className="text-4xl md:text-5xl font-serif font-bold text-emerald-900 mb-6">
+                  Weaving Light Into
+                  <span className="block mt-2 bg-gradient-to-r from-emerald-600 to-gold-600 bg-clip-text text-transparent">
+                    Every Life
+                  </span>
+                </h2>
+              </div>
+
+              <p className="text-lg text-emerald-700/90 leading-relaxed">
+                At ReikiThreads, we believe healing is a deeply personal journey. Our mission is to provide a safe, nurturing space where you can explore the benefits of energy healing without pressure or judgment.
+              </p>
+
+              <p className="text-lg text-emerald-700/90 leading-relaxed">
+                We practice Reiki as a <strong className="text-emerald-900 font-semibold">complementary wellness method</strong>, supporting – never replacing – your overall health journey. Our approach is rooted in honesty, respect, and genuine care.
+              </p>
+
+              {/* Key Points */}
+              <div className="grid grid-cols-2 gap-4 pt-4">
+                {[
+                  { icon: Shield, text: 'Safe & Judgment-Free' },
+                  { icon: Heart, text: 'Compassionate Care' },
+                  { icon: Award, text: 'Certified Practice' },
+                  { icon: Users, text: 'Personalized Approach' }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center">
+                      <item.icon className="w-4 h-4 text-emerald-600" />
+                    </div>
+                    <span className="text-sm text-emerald-700 font-medium">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Disclaimer */}
+              <div className="mt-8 p-5 bg-emerald-50 rounded-xl border-l-4 border-gold-500">
+                <p className="text-sm text-emerald-800 italic leading-relaxed">
+                  "ReikiThreads Foundation practices Reiki as a complementary energy wellness method and does not replace medical treatment. We encourage clients to continue working with their healthcare providers."
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Right - Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1400&q=80"
+                  alt="Peaceful healing environment"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-labelledby="title desc">
+  <title id="title">ReikiThreads Foundation logo</title>
+  <desc id="desc">Minimal lotus and energy thread icon with the text ReikiThreads Foundation</desc>
+  <defs>
+    <linearGradient id="g-emg" x1="0" x2="1">
+      <stop offset="0%" stop-color="#065f46" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <linearGradient id="g-gold" x1="0" x2="1">
+      <stop offset="0%" stop-color="#facc15" />
+      <stop offset="100%" stop-color="#eab308" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#065f46" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- Icon: gentle thread forming an infinity with a lotus center -->
+  <g transform="translate(60,60)" filter="url(#shadow)">
+    <!-- Infinity thread -->
+    <path d="M60 40 C20 0, -20 80, 60 120 C140 160, 180 40, 120 40 C80 40, 60 80, 60 40 Z" fill="none" stroke="url(#g-emg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.95" />
+    <!-- Lotus (stylized) -->
+    <g transform="translate(60,60)">
+      <path d="M0 -26 C8 -18, 14 -6, 0 6 C-14 -6, -8 -18, 0 -26 Z" fill="url(#g-gold)" />
+      <path d="M0 -18 C10 -10, 18 2, 0 18 C-18 2, -10 -10, 0 -18 Z" fill="url(#g-emg)" opacity="0.9" />
+      <circle cx="0" cy="0" r="3" fill="#fff" opacity="0.95" />
+    </g>
+  </g>
+
+  <!-- Text -->
+  <g transform="translate(160,110)">
+    <text x="0" y="-6" font-family="Cormorant, Georgia, serif" font-weight="600" font-size="36" fill="#022c22">ReikiThreads</text>
+    <text x="0" y="26" font-family="Inter, system-ui, sans-serif" font-weight="600" font-size="12" fill="#eab308" letter-spacing="2">FOUNDATION</text>
+  </g>
+</svg>

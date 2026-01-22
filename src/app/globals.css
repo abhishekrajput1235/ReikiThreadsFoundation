@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-cream-50 text-emerald-950 font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-400 text-emerald-950 font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-gold-500/30 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-4 border-2 border-emerald-800 text-emerald-800 font-semibold rounded-full transition-all duration-300 hover:bg-emerald-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2;
+  }
+  
+  .btn-white {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-white text-emerald-900 font-semibold rounded-full transition-all duration-300 hover:bg-cream-100 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-emerald-900;
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl shadow-lg shadow-emerald-950/5 p-8 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-950/10 hover:-translate-y-1;
+  }
+
+  .hero-card {
+    /* Use explicit CSS to avoid Tailwind parsing issues for fractional opacity */
+    background-color: rgba(255,255,255,0.08);
+    backdrop-filter: blur(6px);
+    border-radius: 1rem; /* matches rounded-2xl */
+    padding: 1.5rem; /* p-6 */
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  @media (min-width: 768px) {
+    .hero-card {
+      padding: 2.5rem; /* md:p-10 */
+    }
+  }
+
+  .text-glow {
+    text-shadow: 0 12px 30px rgba(2,44,34,0.25);
+  }
+  
+  .section-padding {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-gold-500 to-gold-300 bg-clip-text text-transparent;
+  }
+  
+  .input-field {
+    @apply w-full px-5 py-4 bg-white border border-emerald-200 rounded-xl text-emerald-900 placeholder-emerald-400 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all duration-200;
+  }
+  
+  .label-text {
+    @apply block text-sm font-medium text-emerald-800 mb-2;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    /* Fallback: improve line breaks for better balance across browsers */
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+  
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f3ef;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #065f46;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #047857;
+}
+
+/* Lotus loader animation */
+.lotus-loader {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lotus-loader::before {
+  content: '🪷';
+  font-size: 3rem;
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Glowing orb effect */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.4;
+  animation: float 8s ease-in-out infinite;
+}
+
+.orb-gold {
+  background: linear-gradient(135deg, #facc15, #eab308);
+}
+
+.orb-emerald {
+  background: linear-gradient(135deg, #08a0a0, #065f7a);
+}
+
+/* Large animated logo */
+.logo-hero {
+  animation: float 8s ease-in-out infinite, glow 3s ease-in-out infinite alternate;
+  transition: transform 300ms ease;
+}
+.logo-hero:hover {
+  transform: scale(1.03) rotate(-0.6deg);
+}
+
+/* pull up hero card to overlap large logo */
+@media (min-width: 768px) {
+  .hero-card {
+    margin-top: -4rem;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-card {
+    margin-top: -6rem;
+  }
+}

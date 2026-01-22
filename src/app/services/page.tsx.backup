@@ -1,0 +1,446 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { ArrowRight, Clock, Sparkles, Globe, Heart, Leaf, Sun, Moon } from 'lucide-react'
+import ScrollStackItem from '@/components/ScrollStackItem'
+
+const services = [
+  {
+    id: 'reiki-healing',
+    icon: Sparkles,
+    title: 'Reiki Energy Healing (Certified Reiki Master)',
+    description: 'Experience the gentle, transformative power of healing from a Certified Reiki Master. This foundational service channels universal life energy to support your body\'s natural healing processes.',
+    benefits: [
+      'Deep relaxation and stress relief',
+      'Emotional balance and clarity',
+      'Release of energy blockages',
+      'Enhanced sense of well-being',
+    ],
+    duration: '60 minutes',
+    format: 'In-person & Distance',
+    price: 'Contact for pricing',
+    image: '/images/reiki-healing.jpg'
+  },
+  {
+    id: 'distance-reiki',
+    icon: Globe,
+    title: 'Distance Reiki Healing',
+    description: 'Receive the full benefits of Reiki healing from anywhere in the world. Using Certified Reiki Master distance symbols, energy transcends physical space to reach you wherever you are.',
+    benefits: [
+      'Same effectiveness as in-person sessions',
+      'Convenient from your own space',
+      'Flexible scheduling across time zones',
+      'Perfect for global clients',
+    ],
+    duration: '45-60 minutes',
+    format: 'Online/Remote',
+    price: 'Contact for pricing',
+    image: '/images/distance-healing.jpg'
+  },
+  {
+    id: 'chakra-balancing',
+    icon: Sun,
+    title: 'Chakra Balancing',
+    description: 'Restore harmony to your seven main energy centers. This focused session identifies and addresses imbalances in your chakra system, promoting optimal energy flow.',
+    benefits: [
+      'Improved energy flow',
+      'Emotional and physical alignment',
+      'Greater self-awareness',
+      'Enhanced vitality',
+    ],
+    duration: '75 minutes',
+    format: 'In-person & Distance',
+    price: 'Contact for pricing',
+    image: '/images/chakra-energy.jpg'
+  },
+  {
+    id: 'stress-anxiety-healing',
+    icon: Heart,
+    title: 'Stress, Anxiety & Depression Healing',
+    description: 'Specialized Reiki sessions to help release the burdens of stress, anxiety, and depression. We work with you to understand your struggles and tailor therapies for calm and peaceful state of mind.',
+    benefits: [
+      'Reduced anxiety and stress levels',
+      'Emotional release and healing',
+      'Improved mental clarity',
+      'Restored sense of peace',
+    ],
+    duration: '60-75 minutes',
+    format: 'In-person & Distance',
+    price: 'Contact for pricing',
+    image: '/images/stress-relief.jpg'
+  },
+  {
+    id: 'financial-abundance',
+    icon: Sparkles,
+    title: 'Financial Abundance & Prosperity Healing',
+    description: 'Clear negative patterns and energies that limit financial growth. Align your energy with prosperity and abundance to attract greater opportunities and financial success.',
+    benefits: [
+      'Release of limiting beliefs about money',
+      'Increased abundance consciousness',
+      'Attract financial opportunities',
+      'Greater financial confidence',
+    ],
+    duration: '60 minutes',
+    format: 'In-person & Distance',
+    price: 'Contact for pricing',
+    image: '/images/abundance-money.jpg'
+  },
+  {
+    id: 'career-growth',
+    icon: Globe,
+    title: 'Career Growth & Success Healing',
+    description: 'Clear emotional and energetic blocks holding you back professionally. Align with your purpose, attract opportunities, and make empowered career choices.',
+    benefits: [
+      'Career clarity and direction',
+      'Removal of professional blocks',
+      'Increased motivation and focus',
+      'Attract fulfilling opportunities',
+    ],
+    duration: '60 minutes',
+    format: 'In-person & Distance',
+    price: 'Contact for pricing',
+    image: '/images/career-growth.jpg'
+  },
+  {
+    id: 'relationship-healing',
+    icon: Heart,
+    title: 'Relationship Healing',
+    description: 'Resolve misunderstandings, strengthen bonds, and restore harmony in relationships. Whether romantic, family, or professional connections, transform them into extraordinary relationships.',
+    benefits: [
+      'Improved communication',
+      'Emotional healing in relationships',
+      'Stronger bonds and trust',
+      'Resolution of conflicts',
+    ],
+    duration: '60-75 minutes',
+    format: 'In-person & Distance',
+    price: 'Contact for pricing',
+    image: '/images/relationship-healing.jpg'
+  },
+  {
+    id: 'manifestation-healing',
+    icon: Sun,
+    title: 'Manifestation & Goal Achievement',
+    description: 'Clear limiting beliefs and energy blockages that prevent you from achieving your dreams. Turn your intentions into reality through focused energy work.',
+    benefits: [
+      'Clear limiting beliefs',
+      'Enhanced manifestation ability',
+      'Goal achievement support',
+      'Increased self-confidence',
+    ],
+    duration: '60 minutes',
+    format: 'In-person & Distance',
+    price: 'Contact for pricing',
+    image: '/images/manifestation-goals.jpg'
+  },
+  {
+    id: 'crystal-healing',
+    icon: Moon,
+    title: 'Crystal Healing & Energy Work',
+    description: 'Use the power of crystals to address mood swings, health concerns, and blocked energies. Personalized crystal recommendations for healing and balance.',
+    benefits: [
+      'Crystal energy alignment',
+      'Emotional and physical healing',
+      'Enhanced intuition',
+      'Protective energy field',
+    ],
+    duration: '60 minutes',
+    format: 'In-person & Distance',
+    price: 'Contact for pricing',
+    image: '/images/crystal-healing.jpg'
+  },
+  {
+    id: 'pet-healing',
+    icon: Leaf,
+    title: 'Pet & Animal Healing',
+    description: 'Compassionate energy healing for your beloved pets and animals. Help them feel calm, safe, and healed through gentle Reiki and energy work.',
+    benefits: [
+      'Calm and relaxed pets',
+      'Support for health issues',
+      'Emotional healing for animals',
+      'Stronger pet-owner bond',
+    ],
+    duration: '30-45 minutes',
+    format: 'Distance (for pet owners)',
+    price: 'Contact for pricing',
+    image: '/images/pet-healing.jpg'
+  },
+  {
+    id: 'aura-cleansing',
+    icon: Moon,
+    title: 'Aura Cleansing',
+    description: 'Clear and refresh your energetic field. This session removes stagnant or negative energy patterns from your aura, leaving you feeling lighter and more protected.',
+    benefits: [
+      'Removal of negative energy',
+      'Strengthened personal boundaries',
+      'Increased clarity and lightness',
+      'Enhanced spiritual protection',
+    ],
+    duration: '60 minutes',
+    format: 'In-person & Distance',
+    price: 'Contact for pricing',
+    image: '/images/aura-cleansing.jpg'
+  },
+  {
+    id: 'meditative-sessions',
+    icon: Leaf,
+    title: 'Meditative Healing Sessions',
+    description: 'Combine the power of guided meditation with Reiki energy healing. This integrative approach deepens your relaxation and enhances the healing experience.',
+    benefits: [
+      'Deep meditative states',
+      'Stress and anxiety relief',
+      'Mental clarity and focus',
+      'Inner peace and calm',
+    ],
+    duration: '60-90 minutes',
+    format: 'In-person & Distance',
+    price: 'Contact for pricing',
+    image: '/images/meditation-healing.jpg'
+  },
+]
+
+export default function ServicesPage() {
+  return (
+    <>
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 bg-black overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="orb orb-gold w-72 h-72 -top-36 -left-36 opacity-30" />
+          <div className="orb orb-emerald w-64 h-64 bottom-0 right-1/4 opacity-20" />
+        </div>
+
+        <div className="container-custom relative z-10">
+          <div className="max-w-3xl">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-gold-300 text-sm mb-6"
+            >
+              <Heart className="w-4 h-4 mr-2" />
+              Ethical & Professional
+            </motion.span>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-5xl md:text-6xl font-serif font-bold text-white mb-6"
+            >
+              Healing<br />
+              <span className="text-gold-400">Services</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-xl text-emerald-100/80 leading-relaxed"
+            >
+              Discover our range of complementary energy wellness services, each designed
+              to support your journey toward balance, peace, and self-healing.
+            </motion.p>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="relative bg-cream-50 min-h-screen">
+        <ScrollStack
+          className="services-scroll-stack"
+          itemDistance={200}
+          itemScale={0.04}
+          itemStackDistance={30}
+          stackPosition="20%"
+          scaleEndPosition="15%"
+          baseScale={0.88}
+          useWindowScroll={true}
+        >
+          {services.map((service, index) => (
+            <ScrollStackItem
+              key={service.id}
+              itemClassName="bg-white shadow-2xl"
+            >
+              <div id={service.id} className="h-full">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full">
+                  {/* Service Image */}
+                  <div className="lg:col-span-1">
+                    <div className="aspect-[4/3] lg:h-full rounded-xl overflow-hidden">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Service Info */}
+                  <div className="lg:col-span-1">
+                    <div className="flex items-start gap-5 mb-6">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg flex-shrink-0">
+                        <service.icon className="w-7 h-7 text-white" />
+                      </div>
+                      <div>
+                        <h2 className="text-2xl md:text-3xl font-serif font-bold text-emerald-900 mb-2">
+                          {service.title}
+                        </h2>
+                        <div className="flex flex-wrap gap-3">
+                          <span className="inline-flex items-center text-sm text-emerald-600">
+                            <Clock className="w-4 h-4 mr-1" />
+                            {service.duration}
+                          </span>
+                          <span className="inline-flex items-center text-sm text-emerald-600">
+                            <Globe className="w-4 h-4 mr-1" />
+                            {service.format}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p className="text-emerald-700/80 text-lg leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+
+                    <h3 className="text-lg font-semibold text-emerald-900 mb-3">
+                      Intended Benefits:
+                    </h3>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+                      {service.benefits.map((benefit, i) => (
+                        <li key={i} className="flex items-center text-emerald-700/80">
+                          <span className="w-1.5 h-1.5 rounded-full bg-gold-500 mr-3 flex-shrink-0" />
+                          {benefit}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* CTA Sidebar */}
+                  <div className="lg:col-span-1">
+                    <div className="bg-emerald-50 rounded-2xl p-6 h-full flex flex-col justify-center">
+                      <p className="text-sm text-emerald-600 mb-2">Investment</p>
+                      <p className="text-2xl font-serif font-bold text-emerald-900 mb-6">
+                        {service.price}
+                      </p>
+                      <Link
+                        href="/book"
+                        className="btn-primary w-full justify-center group"
+                      >
+                        Book This Service
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                      <p className="text-xs text-emerald-600/70 text-center mt-4">
+                        Free consultation available
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollStackItem>
+          ))}
+        </ScrollStack>
+      </section>
+
+      {/* Disclaimer Section */}
+      <section className="py-12 bg-white">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <div className="p-8 bg-emerald-50 rounded-2xl border border-emerald-100">
+              <h3 className="text-xl font-serif font-semibold text-emerald-900 mb-4">
+                Important Notice
+              </h3>
+              <p className="text-emerald-700/80 leading-relaxed">
+                All services offered by ReikiThreads Foundation are complementary wellness practices.
+                They are intended to support your overall well-being and do not diagnose, treat, or
+                cure any medical condition. We encourage you to continue working with your healthcare
+                providers and never discontinue any medical treatment based on energy healing sessions.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="section-padding bg-black">
+        <div className="container-custom">
+          <div className="text-center mb-16">
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-gold-400 font-medium text-sm tracking-wider uppercase"
+            >
+              What to Expect
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl font-serif font-bold text-white mt-3"
+            >
+              Your Session Journey
+            </motion.h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {[
+              { step: '01', title: 'Consultation', desc: 'We discuss your needs and answer any questions.' },
+              { step: '02', title: 'Preparation', desc: 'Create a calm, comfortable environment.' },
+              { step: '03', title: 'Session', desc: 'Experience gentle, restorative energy healing.' },
+              { step: '04', title: 'Integration', desc: 'Guidance for continuing your wellness journey.' },
+            ].map((item, index) => (
+              <motion.div
+                key={item.step}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gold-500/20 border-2 border-gold-500 flex items-center justify-center">
+                  <span className="text-2xl font-bold text-gold-400">{item.step}</span>
+                </div>
+                <h3 className="text-xl font-serif font-semibold text-white mb-2">{item.title}</h3>
+                <p className="text-emerald-100/70">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="section-padding bg-cream-50">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-emerald-900 mb-6">
+              Ready to Begin<br />
+              <span className="gradient-text">Your Healing Journey?</span>
+            </h2>
+            <p className="text-emerald-700/80 text-lg mb-10">
+              Schedule your first session or book a free consultation to discuss
+              which service is right for you.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/book" className="btn-primary group">
+                Book a Session
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link href="/contact" className="btn-secondary">
+                Contact Us
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </>
+  )
+}

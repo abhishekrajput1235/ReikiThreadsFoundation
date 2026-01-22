@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-labelledby="title desc">
+  <title id="title">ReikiThreads symbol</title>
+  <desc id="desc">Minimal lotus and energy thread icon</desc>
+  <defs>
+    <linearGradient id="g-emg" x1="0" x2="1">
+      <stop offset="0%" stop-color="#08a0a0" />
+      <stop offset="100%" stop-color="#065f7a" />
+    </linearGradient>
+    <linearGradient id="g-gold" x1="0" x2="1">
+      <stop offset="0%" stop-color="#facc15" />
+      <stop offset="100%" stop-color="#eab308" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#071035" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <!-- Icon: gentle thread forming an infinity with a lotus center (symbol only) -->
+  <g transform="translate(40,40) scale(1.2)" filter="url(#shadow)">
+    <!-- Infinity thread -->
+    <path d="M60 40 C20 0, -20 80, 60 120 C140 160, 180 40, 120 40 C80 40, 60 80, 60 40 Z" fill="none" stroke="url(#g-emg)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.98" />
+    <!-- Lotus (stylized) -->
+    <g transform="translate(60,60) scale(1.2)">
+      <path d="M0 -26 C8 -18, 14 -6, 0 6 C-14 -6, -8 -18, 0 -26 Z" fill="url(#g-gold)" />
+      <path d="M0 -18 C10 -10, 18 2, 0 18 C-18 2, -10 -10, 0 -18 Z" fill="url(#g-emg)" opacity="0.95" />
+      <circle cx="0" cy="0" r="4" fill="#fff" opacity="0.95" />
+    </g>
+  </g>
+</svg>
