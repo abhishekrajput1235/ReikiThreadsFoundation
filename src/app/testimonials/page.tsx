@@ -75,7 +75,7 @@ const testimonials = [
     rating: 5,
     date: 'October 2025',
     service: 'Reiki Energy Healing',
-    image: '/images/testimonial-artist-creative.jpg'
+    image: '/images/img/emma_thompson.avif'
   },
   {
     id: 8,
