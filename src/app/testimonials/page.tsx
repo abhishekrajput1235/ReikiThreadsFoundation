@@ -488,7 +488,8 @@ export default function TestimonialsPage() {
 }
 
 // Testimonials Scroller Component with Arrow Navigation
-function TestimonialsScroller({ testimonials }: { testimonials: typeof testimonials }) {
+type Testimonial = typeof testimonials[number]
+function TestimonialsScroller({ testimonials }: { testimonials: Testimonial[] }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)

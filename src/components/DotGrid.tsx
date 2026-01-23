@@ -188,17 +188,21 @@ const DotGrid: React.FC<DotGridProps> = ({
 
     useEffect(() => {
         buildGrid();
-        let ro: ResizeObserver | null = null;
-        if ('ResizeObserver' in window) {
-            ro = new ResizeObserver(buildGrid);
-            wrapperRef.current && ro.observe(wrapperRef.current);
-        } else {
-            window.addEventListener('resize', buildGrid);
+        if (typeof window !== 'undefined' && typeof ResizeObserver !== 'undefined') {
+            const ro = new ResizeObserver(buildGrid);
+            if (wrapperRef.current) {
+                ro.observe(wrapperRef.current);
+            }
+            return () => {
+                ro.disconnect();
+            };
+        } else if (typeof window !== 'undefined') {
+            const handleResize = buildGrid;
+            window.addEventListener('resize', handleResize);
+            return () => {
+                window.removeEventListener('resize', handleResize);
+            };
         }
-        return () => {
-            if (ro) ro.disconnect();
-            else window.removeEventListener('resize', buildGrid);
-        };
     }, [buildGrid]);
 
     useEffect(() => {
