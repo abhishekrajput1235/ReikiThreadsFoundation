@@ -136,6 +136,22 @@ const stats = [
   { value: '95%', label: 'Return Clients' },
 ]
 
+const galleryItems = [
+  { image: '/images/gallery/g1.jpg', text: 'Healing Moments' },
+  { image: '/images/gallery/g2.jpg', text: 'Serenity' },
+  { image: '/images/gallery/g3.jpg', text: 'Peace' },
+  { image: '/images/gallery/g4.jpg', text: 'Balance' },
+  { image: '/images/gallery/g5.jpg', text: 'Harmony' },
+  { image: '/images/gallery/g6.jpg', text: 'Energy' },
+  { image: '/images/gallery/g7.jpg', text: 'Wellness' },
+  { image: '/images/gallery/g8.jpg', text: 'Connection' },
+  { image: '/images/gallery/g9.jpg', text: 'Spirit' },
+  { image: '/images/gallery/g10.jpg', text: 'Light' },
+  { image: '/images/gallery/g11.jpg', text: 'Growth' },
+  { image: '/images/gallery/g12.jpg', text: 'Calm' },
+  { image: '/images/gallery/g13.jpg', text: 'Flow' },
+]
+
 export default function TestimonialsPage() {
   return (
     <>
@@ -379,7 +395,7 @@ export default function TestimonialsPage() {
               viewport={{ once: true }}
               className="text-gold-400 font-medium text-sm tracking-wider uppercase"
             >
-              Testimonials
+              Awasome Gallery
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -387,7 +403,7 @@ export default function TestimonialsPage() {
               viewport={{ once: true }}
               className="text-4xl md:text-5xl font-serif font-bold text-white mt-3 mb-4"
             >
-              What Our Clients Say
+              Our Gallery
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -396,17 +412,14 @@ export default function TestimonialsPage() {
               transition={{ delay: 0.1 }}
               className="text-emerald-100/70 text-lg max-w-2xl mx-auto"
             >
-              Scroll or drag to explore testimonials from our healing community
+              Scroll or drag to explore gallery from our healing community
             </motion.p>
           </div>
 
           {/* Circular Gallery */}
           <div className="w-full h-[600px] md:h-[700px]">
             <CircularGallery
-              items={testimonials.map(t => ({
-                image: t.image,
-                text: t.name
-              }))}
+              items={galleryItems}
               bend={2.5}
               textColor="#10b981"
               borderRadius={0.08}

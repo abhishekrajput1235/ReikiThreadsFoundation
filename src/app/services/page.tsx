@@ -1,8 +1,9 @@
 'use client'
 
+import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, Clock, Sparkles, Globe, Heart, Leaf, Sun, Moon } from 'lucide-react'
+import { ArrowRight, Clock, Sparkles, Globe, Heart, Leaf, Sun, Moon, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const services = [
   {
@@ -19,7 +20,7 @@ const services = [
     duration: '60 minutes',
     format: 'In-person & Distance',
     price: 'Contact for pricing',
-    image: '/images/reiki-healing.jpg'
+    image: '/images/img/ReikiEnergy.jpg'
   },
   {
     id: 'distance-reiki',
@@ -35,7 +36,7 @@ const services = [
     duration: '45-60 minutes',
     format: 'Online/Remote',
     price: 'Contact for pricing',
-    image: '/images/distance-healing.jpg'
+    image: '/images/img/distanceHealing.jpg'
   },
   {
     id: 'chakra-balancing',
@@ -51,7 +52,7 @@ const services = [
     duration: '75 minutes',
     format: 'In-person & Distance',
     price: 'Contact for pricing',
-    image: '/images/chakra-energy.jpg'
+    image: '/images/img/chakryabalancing.jpg'
   },
   {
     id: 'stress-anxiety-healing',
@@ -67,7 +68,7 @@ const services = [
     duration: '60-75 minutes',
     format: 'In-person & Distance',
     price: 'Contact for pricing',
-    image: '/images/stress-relief.jpg'
+    image: '/images/img/DepressionHealing.jpg'
   },
   {
     id: 'financial-abundance',
@@ -83,7 +84,7 @@ const services = [
     duration: '60 minutes',
     format: 'In-person & Distance',
     price: 'Contact for pricing',
-    image: '/images/abundance-money.jpg'
+    image: '/images/img/FinancialAbundance.jpg'
   },
   {
     id: 'career-growth',
@@ -99,7 +100,7 @@ const services = [
     duration: '60 minutes',
     format: 'In-person & Distance',
     price: 'Contact for pricing',
-    image: '/images/career-growth.jpg'
+    image: '/images/img/carriarGrowth.jpg'
   },
   {
     id: 'relationship-healing',
@@ -115,7 +116,7 @@ const services = [
     duration: '60-75 minutes',
     format: 'In-person & Distance',
     price: 'Contact for pricing',
-    image: '/images/relationship-healing.jpg'
+    image: '/images/img/relationShipHeals.jpg'
   },
   {
     id: 'manifestation-healing',
@@ -131,7 +132,7 @@ const services = [
     duration: '60 minutes',
     format: 'In-person & Distance',
     price: 'Contact for pricing',
-    image: '/images/manifestation-goals.jpg'
+    image: '/images/img/goalsAchievement.jpg'
   },
   {
     id: 'crystal-healing',
@@ -147,7 +148,7 @@ const services = [
     duration: '60 minutes',
     format: 'In-person & Distance',
     price: 'Contact for pricing',
-    image: '/images/crystal-healing.jpg'
+    image: '/images/img/CrystelHealing1.jpg'
   },
   {
     id: 'pet-healing',
@@ -163,7 +164,7 @@ const services = [
     duration: '30-45 minutes',
     format: 'Distance (for pet owners)',
     price: 'Contact for pricing',
-    image: '/images/pet-healing.jpg'
+    image: '/images/img/petHealing.jpg'
   },
   {
     id: 'aura-cleansing',
@@ -179,7 +180,7 @@ const services = [
     duration: '60 minutes',
     format: 'In-person & Distance',
     price: 'Contact for pricing',
-    image: '/images/aura-cleansing.jpg'
+    image: '/images/img/auraCleaning.jpg'
   },
   {
     id: 'meditative-sessions',
@@ -195,11 +196,49 @@ const services = [
     duration: '60-90 minutes',
     format: 'In-person & Distance',
     price: 'Contact for pricing',
-    image: '/images/meditation-healing.jpg'
+    image: '/images/img/MeditativeHealingSessions.jpg'
   },
 ]
 
 export default function ServicesPage() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Handle scroll to update active index based on card positions
+  const handleScroll = () => {
+    if (!sliderRef.current) return;
+    const container = sliderRef.current;
+    const containerCenter = container.scrollLeft + container.offsetWidth / 2;
+
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    cardRefs.current.forEach((card, index) => {
+      if (card) {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const distance = Math.abs(containerCenter - cardCenter);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      }
+    });
+
+    if (closestIndex !== activeIndex) {
+      setActiveIndex(closestIndex);
+    }
+  };
+
+  // Scroll to specific card
+  const scrollToCard = (index: number) => {
+    const card = cardRefs.current[index];
+    if (!sliderRef.current || !card) return;
+    const container = sliderRef.current;
+    const scrollPosition = card.offsetLeft - (container.offsetWidth - card.offsetWidth) / 2;
+    container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+  };
+
   return (
     <>
       {/* Hero Section - Professional Dark Design */}
@@ -381,141 +420,260 @@ export default function ServicesPage() {
         </motion.div>
       </section>
 
-      {/* Services Sticky Stack */}
-      <section className="py-20 bg-cream-50">
-        <div className="max-w-6xl mx-auto px-4">
-          {services.map((service, index) => (
-            <div
-              key={service.id}
-              id={service.id}
-              className="sticky mb-8"
+      {/* Services Slider */}
+      <section className="py-16 bg-cream-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Section Header */}
+          <div className="text-center mb-10">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-4xl font-serif font-bold text-emerald-900 mb-3"
+            >
+              Our Healing Services
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-emerald-700/70 max-w-xl mx-auto"
+            >
+              Swipe or use arrows to explore our range of energy healing services
+            </motion.p>
+          </div>
+
+          {/* Slider Container */}
+          <div className="relative">
+            {/* Navigation Arrows */}
+            <button
+              onClick={() => scrollToCard(Math.max(0, activeIndex - 1))}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 -ml-2 md:-ml-4"
               style={{
-                top: `${80 + index * 20}px`,
+                background: 'rgba(255, 255, 255, 0.9)',
+                backdropFilter: 'blur(8px)',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+                border: '1px solid rgba(255, 255, 255, 0.5)'
               }}
             >
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
-                style={{
-                  transform: `scale(${1 - index * 0.02})`,
-                }}
-              >
-                <div className="relative bg-white/90 backdrop-blur-sm">
-                  {/* Decorative gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-gold-500/5 pointer-events-none" />
+              <ChevronLeft className="w-6 h-6 text-emerald-800" />
+            </button>
 
-                  <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-8 p-8">
-                    {/* Service Image */}
-                    <div className="lg:col-span-1">
-                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden group">
-                        {/* Image overlay gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-                        <img
-                          src={service.image}
-                          alt={service.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                        />
-                        {/* Floating badge on image */}
-                        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg z-20">
-                          <span className="text-xs font-semibold text-emerald-700">{service.format.split(' ')[0]}</span>
-                        </div>
-                      </div>
+            <button
+              onClick={() => scrollToCard(Math.min(services.length - 1, activeIndex + 1))}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 -mr-2 md:-mr-4"
+              style={{
+                background: 'rgba(255, 255, 255, 0.9)',
+                backdropFilter: 'blur(8px)',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+                border: '1px solid rgba(255, 255, 255, 0.5)'
+              }}
+            >
+              <ChevronRight className="w-6 h-6 text-emerald-800" />
+            </button>
+
+            {/* Slider Track */}
+            <div
+              ref={sliderRef}
+              onScroll={handleScroll}
+              className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 px-[10%] md:px-[15%] hide-scrollbar items-center"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+              }}
+            >
+              {services.map((service, index) => {
+                const isActive = index === activeIndex;
+                const distance = Math.abs(index - activeIndex);
+                // More noticeable scale difference
+                const scale = isActive ? 1.05 : Math.max(0.75, 1 - distance * 0.15);
+                const opacity = isActive ? 1 : Math.max(0.5, 1 - distance * 0.25);
+
+                return (
+                  <div
+                    key={service.id}
+                    id={service.id}
+                    ref={(el) => { cardRefs.current[index] = el; }}
+                    className={`service-card flex-shrink-0 snap-center rounded-2xl overflow-hidden relative transition-all duration-500 ease-out ${isActive ? 'z-10' : 'z-0'}`}
+                    style={{
+                      width: isActive ? '80vw' : '65vw',
+                      maxWidth: isActive ? '700px' : '550px',
+                      transform: `scale(${scale})`,
+                      opacity: opacity,
+                      boxShadow: isActive
+                        ? '0 30px 60px -15px rgba(0, 0, 0, 0.35)'
+                        : '0 10px 20px -5px rgba(0, 0, 0, 0.15)',
+                      filter: isActive ? 'none' : 'brightness(0.9)'
+                    }}
+                  >
+                    {/* Background Image */}
+                    <div className="absolute inset-0">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover"
+                        style={{ filter: 'brightness(1.1) saturate(0.85)' }}
+                      />
                     </div>
 
-                    {/* Service Info */}
-                    <div className="lg:col-span-1 flex flex-col">
-                      {/* Icon & Title */}
-                      <div className="mb-5">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 via-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 flex-shrink-0 rotate-3 hover:rotate-0 transition-all duration-300">
+                    {/* Vignette effect */}
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background: 'radial-gradient(ellipse at center, transparent 20%, rgba(197,206,197,0.5) 100%)'
+                      }}
+                    />
 
+                    {/* Decorative curtain-like gradients on sides */}
+                    <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#c5cec5]/60 to-transparent pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#c5cec5]/60 to-transparent pointer-events-none" />
 
-                            <service.icon className="w-7 h-7 text-white" />
-                          </div>
-                          <div className="flex-1">
-                            <h2 className="text-2xl md:text-3xl font-serif font-bold bg-gradient-to-r from-emerald-900 to-emerald-700 bg-clip-text text-transparent leading-tight">
-                              {service.title}
-                            </h2>
-                          </div>
+                    {/* Decorative candle glow effects */}
+                    <div className="absolute bottom-16 left-6 w-3 h-3 rounded-full opacity-50 animate-pulse z-10" style={{ backgroundColor: '#fff9e6', boxShadow: '0 0 15px 8px rgba(255,249,230,0.4)' }} />
+                    <div className="absolute bottom-16 right-6 w-3 h-3 rounded-full opacity-50 animate-pulse z-10" style={{ backgroundColor: '#fff9e6', boxShadow: '0 0 15px 8px rgba(255,249,230,0.4)', animationDelay: '0.5s' }} />
+
+                    {/* Content Container */}
+                    <div className="relative z-10 px-4 md:px-6 py-5 md:py-6">
+                      {/* Header Section with Glass Background */}
+                      <div
+                        className="text-center mb-3 px-4 md:px-6 py-3 rounded-xl mx-auto max-w-lg"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.3)',
+                          backdropFilter: 'blur(12px)',
+                          WebkitBackdropFilter: 'blur(12px)',
+                          border: '1px solid rgba(255, 255, 255, 0.4)',
+                          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)'
+                        }}
+                      >
+                        {/* Elegant Script Title */}
+                        <h2
+                          className="text-xl md:text-2xl lg:text-3xl font-serif italic font-normal mb-1 tracking-wide"
+                          style={{
+                            color: 'black',
+                            fontFamily: "'Brush Script MT', 'Segoe Script', 'Bradley Hand', cursive",
+                            textShadow: '1px 1px 2px rgba(255,255,255,0.8)',
+                            letterSpacing: '0.02em'
+                          }}
+                        >
+                          {service.title.split('(')[0].trim()}
+                        </h2>
+
+                        {/* Decorative Line */}
+                        <div className="flex items-center justify-center gap-2 mb-1">
+                          <div className="h-[1px] w-8 md:w-12 bg-gradient-to-r from-transparent to-[#4a7c64]/70" />
+                          <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" style={{ color: '#4a7c64' }}>
+                            <path d="M12 2L13.09 8.26L19 6L14.74 10.91L21 12L14.74 13.09L19 18L13.09 15.74L12 22L10.91 15.74L5 18L9.26 13.09L3 12L9.26 10.91L5 6L10.91 8.26L12 2Z" fill="currentColor" opacity="0.8" />
+                          </svg>
+                          <div className="h-[1px] w-8 md:w-12 bg-gradient-to-l from-transparent to-[#4a7c64]/70" />
                         </div>
 
-                        {/* Duration & Format Pills */}
-                        <div className="flex flex-wrap gap-2">
-                          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100">
-                            <Clock className="w-3.5 h-3.5" />
-                            {service.duration}
-                          </span>
-                          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gold-700 bg-gold-50 px-3 py-1.5 rounded-full border border-gold-100">
-                            <Globe className="w-3.5 h-3.5" />
-                            {service.format}
-                          </span>
-                        </div>
+                        {/* Subtitle with Duration */}
+                        <p
+                          className="text-xs md:text-sm font-medium tracking-wider"
+                          style={{
+                            color: 'black',
+                            letterSpacing: '0.05em'
+                          }}
+                        >
+                          {service.duration} Sessions
+                        </p>
                       </div>
 
-                      {/* Description */}
-                      <p className="text-base text-emerald-800/80 leading-relaxed mb-5">
-                        {service.description}
-                      </p>
+                      {/* Spacer for background image visibility */}
+                      <div className="h-20 md:h-24" />
 
-                      {/* Benefits */}
-                      <div className="mt-auto">
-                        <h3 className="text-sm font-bold text-emerald-900 mb-3 uppercase tracking-wide">
-                          Key Benefits:
-                        </h3>
-                        <ul className="grid grid-cols-1 gap-2.5">
-                          {service.benefits.map((benefit, i) => (
-                            <li key={i} className="flex items-start gap-2.5 text-sm text-emerald-700/90">
-                              <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 shadow-sm flex-shrink-0" />
-                              <span className="leading-snug">{benefit}</span>
-                            </li>
+                      {/* Benefits Section with Glass Background */}
+                      <div
+                        className="text-center max-w-lg mx-auto px-4 md:px-6 py-3 rounded-xl"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.3)',
+                          backdropFilter: 'blur(12px)',
+                          WebkitBackdropFilter: 'blur(12px)',
+                          border: '1px solid rgba(255, 255, 255, 0.4)',
+                          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)'
+                        }}
+                      >
+                        {/* Main Benefit - Highlighted */}
+                        <p
+                          className="text-xs md:text-sm font-semibold mb-2 tracking-wide"
+                          style={{
+                            color: 'black',
+                            letterSpacing: '0.03em'
+                          }}
+                        >
+                          {service.benefits[0]}
+                        </p>
+
+                        {/* Other Benefits */}
+                        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+                          {service.benefits.slice(1, 3).map((benefit, i) => (
+                            <div key={i} className="flex items-center gap-1.5">
+                              <svg
+                                className="w-3 h-3 flex-shrink-0"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                style={{ color: 'black' }}
+                              >
+                                <path
+                                  d="M12 2L13.09 8.26L19 6L14.74 10.91L21 12L14.74 13.09L19 18L13.09 15.74L12 22L10.91 15.74L5 18L9.26 13.09L3 12L9.26 10.91L5 6L10.91 8.26L12 2Z"
+                                  fill="currentColor"
+                                  opacity="0.8"
+                                />
+                              </svg>
+                              <span
+                                className="text-xs md:text-sm"
+                                style={{ color: 'black' }}
+                              >
+                                {benefit}
+                              </span>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
                     </div>
 
-                    {/* CTA Sidebar */}
-                    <div className="lg:col-span-1">
-                      <div className="h-full bg-gradient-to-br from-emerald-50 via-emerald-50/50 to-white rounded-2xl p-6 border border-emerald-100 shadow-inner flex flex-col justify-center relative overflow-hidden">
-                        {/* Decorative elements */}
-                        <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-emerald-400/10 to-transparent rounded-full blur-3xl" />
-                        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-br from-gold-400/10 to-transparent rounded-full blur-3xl" />
+                    {/* Bottom CTA Bar */}
+                    {/* Modern Bottom CTA Bar */}
+                    <div
+                      className="relative z-10 px-4 md:px-6 py-4 mt-auto"
+                      style={{
+                        background: 'linear-gradient(to top, rgba(255,255,255,0.8), rgba(255,255,255,0.4))',
+                        backdropFilter: 'blur(8px)',
+                        borderTop: '1px solid rgba(255,255,255,0.5)'
+                      }}
+                    >
+                      <div className="flex items-center justify-center gap-4">
+                        <Link href="/book" className="btn-primary group">
+                          Book a Session
+                          <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                        {/* <Link href="/contact" className="btn-secondary">
+                          Contact Us
+                        </Link> */}
 
-                        <div className="relative z-10 text-center">
-                          {/* Price */}
-                          <div className="mb-6">
-                            <p className="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-2">Investment</p>
-                            <p className="text-3xl font-serif font-bold bg-gradient-to-r from-emerald-900 to-emerald-700 bg-clip-text text-transparent">
-                              {service.price}
-                            </p>
-                          </div>
-
-                          {/* CTA Button */}
-                          <Link
-                            href="/book"
-                            className="block w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/40 transition-all duration-300 group mb-4"
-                          >
-                            <span className="flex items-center justify-center gap-2">
-                              Book This Service
-                              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </span>
-                          </Link>
-
-                          {/* Free Consultation */}
-                          <div className="flex items-center justify-center gap-1.5 text-xs text-emerald-600/80">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            <span>Free consultation available</span>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
+                );
+              })}
             </div>
-          ))}
+          </div>
+
+          {/* Dot Indicators */}
+          {/* <div className="flex justify-center gap-2 mt-6">
+            {services.map((service, index) => (
+              <button
+                key={service.id}
+                onClick={() => scrollToCard(index)}
+                className={`rounded-full transition-all duration-300 hover:scale-125 ${index === activeIndex ? 'w-6 h-2' : 'w-2 h-2'
+                  }`}
+                style={{
+                  backgroundColor: index === activeIndex ? '#065942' : '#c5cec5'
+                }}
+              />
+            ))}
+          </div> */}
         </div>
       </section>
 
