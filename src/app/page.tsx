@@ -58,7 +58,7 @@ const testimonials = [
     role: 'Artist',
     content: 'Reiki opened up my creative channels. I feel more inspired and connected to my artistic flow.',
     rating: 5,
-    image: '/images/testimonial-artist.jpg'
+    image: '/images/testimonial-man-first.jpg'
   },
   {
     name: 'James W.',
@@ -82,14 +82,14 @@ const blogPosts = [
     excerpt: 'Learn about the science and practice behind distance healing and how energy transcends physical space to bring profound healing benefits wherever you are in the world.',
     category: 'Distance Healing',
     readTime: '4 min read',
-    image: '/images/distance-healing.jpg'
+    image: '/images/img/distanceHealing.jpg'
   },
   {
     title: 'Chakra Basics: Your Energy Centers',
     excerpt: 'Explore the seven main chakras and their vital role in maintaining physical, emotional, and spiritual balance for optimal health and well-being.',
     category: 'Chakra Healing',
     readTime: '6 min read',
-    image: '/images/chakra-energy.jpg'
+    image: '/images/img/ChakraBalancing.jpg'
   },
 ]
 
@@ -212,7 +212,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="card group cursor-pointer"
+                className="card group cursor-pointer border-2 border-transparent hover:border-green-500 rounded-xl transition-all duration-300"
               >
                 <div className="aspect-[4/3] rounded-xl overflow-hidden mb-6">
                   <img
@@ -271,7 +271,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.15 }}
-                className="card text-center group"
+                className="card text-center group border-2 border-transparent hover:border-green-500 rounded-xl transition-all duration-300"
               >
                 <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg group-hover:shadow-emerald-500/30 transition-all duration-300 group-hover:scale-110">
                   <feature.icon className="w-8 h-8 text-white" />
@@ -453,7 +453,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.15 }}
-                className="card group cursor-pointer"
+                className="card group cursor-pointer border-2 border-transparent hover:border-green-500 rounded-xl transition-all duration-300"
               >
                 <div className="aspect-[4/3] rounded-xl overflow-hidden mb-6">
                   <img

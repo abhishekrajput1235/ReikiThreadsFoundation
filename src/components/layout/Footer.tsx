@@ -15,6 +15,7 @@ const footerLinks = {
     { name: 'Testimonials', href: '/testimonials' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
+    { name: 'Admin Dashboard', href: '/admin' },
   ],
   legal: [
     { name: 'Privacy Policy', href: '/privacy' },

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import { LayoutProvider } from '@/components/layout/LayoutProvider'
 
 export const metadata: Metadata = {
   title: 'ReikiThreads Foundation | Weaving Light into Your Life',
@@ -28,12 +27,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col" suppressHydrationWarning>
-        <Header />
-        <main className="flex-grow">
+      <body className="min-h-screen" suppressHydrationWarning>
+        <LayoutProvider>
           {children}
-        </main>
-        <Footer />
+        </LayoutProvider>
       </body>
     </html>
   )
