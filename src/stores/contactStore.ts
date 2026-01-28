@@ -5,7 +5,7 @@ interface ContactStore {
   messages: ContactMessage[];
   loading: boolean;
   error: string | null;
-  pagination: { page: number; limit: number; total: number };
+  pagination: { page: number; limit: number; total: number; pages: number };
   filters: { status?: string; search?: string };
 
   fetchMessages: (page?: number, filters?: any) => Promise<void>;
@@ -19,7 +19,7 @@ export const useContactStore = create<ContactStore>((set, get) => ({
   messages: [],
   loading: false,
   error: null,
-  pagination: { page: 1, limit: 10, total: 0 },
+  pagination: { page: 1, limit: 10, total: 0, pages: 0 },
   filters: {},
 
   fetchMessages: async (page = 1, filters = {}) => {

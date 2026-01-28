@@ -527,7 +527,7 @@ export default function ContactPage() {
                       </div>
                     )}
 
-                    {/* Privacy & Submit */}}
+                    {/* Privacy & Submit */}
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-emerald-100">
                       <p className="text-sm text-emerald-600">
                         We respect your privacy. See our{" "}

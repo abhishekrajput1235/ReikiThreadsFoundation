@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     // Validate input
     const validationResult = appointmentSchema.safeParse(body);
     if (!validationResult.success) {
-      return apiError(validationResult.error.errors[0].message, 400);
+      return apiError(validationResult.error.issues[0].message, 400);
     }
 
     const data = validationResult.data;
@@ -50,22 +50,6 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Appointment booking error:', error);
-    return handleError(error);
-  }
-}
-      reminderEmailSent: false,
-    });
-
-    // TODO: Send confirmation email to user and admin
-
-    return apiResponse(
-      {
-        id: appointment._id,
-        message: 'Your booking request has been received. We will contact you within 24 hours to confirm.',
-      },
-      201
-    );
-  } catch (error) {
     return handleError(error);
   }
 }

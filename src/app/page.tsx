@@ -240,6 +240,140 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Featured Service - Aura Cleansing Bath Ritual */}
+      <section className="section-padding bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-900 relative overflow-hidden">
+        {/* Background orbs */}
+        <div className="orb orb-gold w-96 h-96 -top-48 -right-48 opacity-10" />
+        <div className="orb orb-gold w-64 h-64 -bottom-32 -left-32 opacity-10" />
+        
+        <div className="container-custom relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-white"
+            >
+              <span className="text-gold-400 font-medium text-sm tracking-wider uppercase">
+                Featured Healing Experience
+              </span>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold mt-3 mb-6">
+                Aura Cleansing Bath Ritual ✨
+              </h2>
+              <p className="text-emerald-100/90 text-lg leading-relaxed mb-6">
+                The Aura Cleansing Bath Ritual is a sacred healing experience designed to purify the energy field, 
+                release emotional and spiritual blockages, and restore harmony to the body, mind, and soul. This ritual 
+                gently washes away accumulated negative vibrations, leaving the aura clear, balanced, and radiant.
+              </p>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gold-400/20 flex items-center justify-center mt-1">
+                    <div className="w-2 h-2 rounded-full bg-gold-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gold-300 mb-1">🌿 Sacred Experience</h4>
+                    <p className="text-emerald-100/80 text-sm">
+                      Offered in a calm, protected space using charged water infused with natural salts, 
+                      healing herbs, and high-vibrational essential oils.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gold-400/20 flex items-center justify-center mt-1">
+                    <div className="w-2 h-2 rounded-full bg-gold-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gold-300 mb-1">⏳ Session Duration</h4>
+                    <p className="text-emerald-100/80 text-sm">30–45 minutes</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gold-400/20 flex items-center justify-center mt-1">
+                    <div className="w-2 h-2 rounded-full bg-gold-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gold-300 mb-1">✨ Expected Outcome</h4>
+                    <p className="text-emerald-100/80 text-sm">
+                      Clients often leave feeling lighter, peaceful, protected, and deeply aligned.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <Link href="/book" className="btn-white group">
+                Book Your Ritual
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+                <h3 className="text-2xl font-serif font-bold text-gold-300 mb-6">🌸 Spiritual Benefits</h3>
+                <ul className="space-y-4 mb-8">
+                  {[
+                    'Clears negative and stagnant energies',
+                    'Restores balance to the aura and chakras',
+                    'Encourages emotional release and inner healing',
+                    'Enhances spiritual clarity and intuition',
+                    'Promotes calm, grounding, and energetic protection'
+                  ].map((benefit, index) => (
+                    <motion.li
+                      key={index}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      className="flex items-center gap-3 text-emerald-100/90"
+                    >
+                      <div className="w-2 h-2 rounded-full bg-gold-400" />
+                      {benefit}
+                    </motion.li>
+                  ))}
+                </ul>
+
+                <div className="border-t border-white/20 pt-6">
+                  <h4 className="text-xl font-serif font-semibold text-gold-300 mb-4">🌼 Ideal For Clients Who</h4>
+                  <ul className="space-y-3">
+                    {[
+                      'Feel energetically drained or overwhelmed',
+                      'Experience emotional heaviness or restlessness',
+                      'Are sensitive to surrounding energies',
+                      'Seek spiritual cleansing, grounding, and renewal'
+                    ].map((ideal, index) => (
+                      <motion.li
+                        key={index}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.7 + index * 0.1 }}
+                        className="flex items-start gap-3 text-emerald-100/80 text-sm"
+                      >
+                        <div className="w-1.5 h-1.5 rounded-full bg-gold-400 mt-2" />
+                        {ideal}
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-6 p-4 bg-gold-400/10 rounded-xl border border-gold-400/20">
+                  <p className="text-emerald-100/70 text-xs">
+                    ⚠️ This ritual supports spiritual and energetic well-being and is not a substitute for medical or psychological treatment.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="section-padding bg-cream-50">
         <div className="container-custom">

@@ -5,7 +5,7 @@ interface AppointmentStore {
   appointments: Appointment[];
   loading: boolean;
   error: string | null;
-  pagination: { page: number; limit: number; total: number };
+  pagination: { page: number; limit: number; total: number; pages: number };
   filters: { status?: string; service?: string; search?: string };
 
   fetchAppointments: (page?: number, filters?: any) => Promise<void>;
@@ -20,7 +20,7 @@ export const useAppointmentStore = create<AppointmentStore>((set, get) => ({
   appointments: [],
   loading: false,
   error: null,
-  pagination: { page: 1, limit: 10, total: 0 },
+  pagination: { page: 1, limit: 10, total: 0, pages: 0 },
   filters: {},
 
   fetchAppointments: async (page = 1, filters = {}) => {

@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     // Validate input
     const validationResult = contactMessageSchema.safeParse(body);
     if (!validationResult.success) {
-      return apiError(validationResult.error.errors[0].message, 400);
+      return apiError(validationResult.error.issues[0].message, 400);
     }
 
     // Create and save contact message

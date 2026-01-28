@@ -9,6 +9,7 @@ interface ContactMessage {
   subject: string;
   message: string;
   status: 'new' | 'read' | 'replied';
+  notes?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -25,6 +26,7 @@ interface Appointment {
   message?: string;
   firstSession: boolean;
   status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+  notes?: string;
   createdAt: string;
   updatedAt: string;
 }

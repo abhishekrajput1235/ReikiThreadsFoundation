@@ -55,23 +55,18 @@ export async function PUT(request: NextRequest) {
       return apiError('Unauthorized', 401);
     }
 
-    await connectDB();
     const body = await request.json();
+    const { id, status, notes } = body;
 
-    const validationResult = contactMessageUpdateSchema.safeParse(body);
-    if (!validationResult.success) {
-      return apiError(validationResult.error.errors[0].message, 400);
+    if (!id) {
+      return apiError('Message ID is required', 400);
     }
 
-    // Extract ID from URL
-    const url = new URL(request.url);
-    const id = url.pathname.split('/').pop();
-
-    const message = await ContactMessage.findByIdAndUpdate(
-      id,
-      validationResult.data,
-      { new: true }
-    );
+    const message = mockDB.updateContactMessage(id, {
+      status: status || undefined,
+      notes: notes || undefined,
+      updatedAt: new Date().toISOString(),
+    });
 
     if (!message) {
       return apiError('Message not found', 404);
