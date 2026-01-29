@@ -131,6 +131,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.625rem;
+  margin-top: 3rem;
   padding: 0.625rem 1.25rem;
   border-radius: 9999px;
   background: linear-gradient(135deg,

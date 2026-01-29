@@ -8,7 +8,9 @@ import DotGrid from './DotGrid'
 
 export default function HeroSection() {
     return (
-        <section className={styles.heroSection}>
+        <section className={styles.heroSection}
+            style={{ paddingBottom: '100px' }}
+        >
             {/* Interactive DotGrid Background */}
             <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
                 <DotGrid
@@ -38,6 +40,7 @@ export default function HeroSection() {
                     >
                         {/* Badge */}
                         <motion.div
+                            style={{ marginTop: '70px' }}
                             className={styles.badge}
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
